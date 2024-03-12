@@ -3,9 +3,7 @@ import TextBox, { TextBoxTypes } from "devextreme-react/text-box";
 import "devextreme/dist/css/dx.light.css";
 import "./SignupPage.scss";
 import { Button } from "devextreme-react/button";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ValueChangedEvent } from "devextreme/ui/text_box";
 import notify from "devextreme/ui/notify";
 
 export default function SignupPage() {
@@ -55,7 +53,6 @@ export default function SignupPage() {
     };
     if (cnfPassValue !== passValue) {
       showError("Password do not match", "error");
-
       return;
     } else if (!inputValue || !emailValue || !passValue || !cnfPassValue) {
       showError("All fields are Mandatory", "error");

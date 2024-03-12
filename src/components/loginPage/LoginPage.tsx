@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import "./LoginPage.scss";
 import notify from "devextreme/ui/notify";
 import { useNavigate } from "react-router-dom";
+import { authActions } from "../../store/authentication";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const dispatch=useDispatch()
+
 
   const emailHandler = (newValue: string) => {
     setEmail(newValue);
@@ -40,11 +44,12 @@ export default function LoginPage() {
 
     if (!email || !pass) {
       showError("All fields are Mandatory", "error");
-    } else if (user.email !== email) {
+    } else if (user?.email !== email) {
       showError("User Does Not Exist", "error");
-    } else if (user.pass !== pass) {
+    } else if (user?.pass !== pass) {
       showError("Wrong Password", "error");
     } else {
+        dispatch(authActions.email(email))
       navigate("/home");
     }
   };
