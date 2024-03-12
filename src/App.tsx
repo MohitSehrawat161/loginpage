@@ -5,6 +5,8 @@ import './App.scss';
 import SignupPage  from './components/signupPage/SignupPage';
 import { Routes,Route } from 'react-router-dom';
 import LoginPage from './components/loginPage/LoginPage';
+import HomePage from './components/HomePage';
+
 
 function App() {
   return (
@@ -12,6 +14,9 @@ function App() {
       <Routes>
 <Route path='/' element={<SignupPage/>}/>
 <Route path='/login' element={<LoginPage/>}/>
+<Route path='/home' element={<HomePage/>} />
+
+
      
       </Routes>
     
