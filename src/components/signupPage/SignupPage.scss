@@ -1,3 +1,4 @@
+$base-rem: 1rem;
 .form {
   // border: 2px solid black;
   width: 20rem;
@@ -10,9 +11,13 @@
   .inputField {
     width: 20rem;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: $base-rem;
   }
   .button{
-    margin-top: 1rem;
+    margin-top: $base-rem;
+  }
+  .span{
+    margin-top: $base-rem;
+
   }
 }
