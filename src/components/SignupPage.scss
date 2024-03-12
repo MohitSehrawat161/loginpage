@@ -1,0 +1,18 @@
+.form {
+  // border: 2px solid black;
+  width: 20rem;
+  height: 50vh;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 3rem;
+  border-radius: 10px;
+
+  .inputField {
+    width: 20rem;
+    margin: auto;
+    margin-top: 1rem;
+  }
+  .button{
+    margin-top: 1rem;
+  }
+}
