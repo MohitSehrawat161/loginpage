@@ -1,21 +1,17 @@
-import React from "react"
+import React from "react";
 import TextBox, { TextBoxTypes } from "devextreme-react/text-box";
 import { Button } from "devextreme-react/button";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function LoginPage(){
-   const navigate= useNavigate()
-    const goToSignupPage=()=>{
-        
-
-    }
-    return (
-        <React.Fragment>
-            <h1>Login</h1>
-            <div className="form">
+export default function LoginPage() {
+  const navigate = useNavigate();
+  const goToSignupPage = () => {};
+  return (
+    <React.Fragment>
+      <h1>Login</h1>
+      <div className="form">
         <form>
-         
           <TextBox
             placeholder="Enter Your Email"
             className="inputField"
@@ -26,18 +22,14 @@ export default function LoginPage(){
             className="inputField"
             showClearButton={true}
           />
-        
+
           <Button className="button" text="Sign Up" />
         </form>
-        <span >
-          Already Have An Account?
-          <Link to={'/'}>
-           <Button onClick={goToSignupPage} text="Login" />{" "}
-          </Link>
-        </span>
+
+        <Link to={"/"}>
+          <Button onClick={goToSignupPage} text="Create An Account" />{" "}
+        </Link>
       </div>
-
-        </React.Fragment>
-
-    )
+    </React.Fragment>
+  );
 }
