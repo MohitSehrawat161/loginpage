@@ -74,13 +74,16 @@ export default function SignupPage() {
           value={inputValue}
           onValueChange={handleInputChange}
         />
+       
+
         <TextBox
           placeholder="Enter Your Email"
           className="inputField"
           showClearButton={true}
           value={emailValue}
           onValueChange={emailHandler}
-        />
+          />
+         
         <TextBox
           placeholder="Enter Password"
           className="inputField"
