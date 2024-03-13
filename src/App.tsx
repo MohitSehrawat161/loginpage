@@ -6,6 +6,7 @@ import SignupPage from "./components/signupPage/SignupPage";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./components/loginPage/LoginPage";
 import HomePage from "./components/HomePage";
+import FileManagement from "./components/fileManagement/FileManagement";
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
+      
+        <Route path="/home" element={  <FileManagement/>} />
+
+      
       </Routes>
     </div>
   );

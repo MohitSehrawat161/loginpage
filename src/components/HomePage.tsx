@@ -11,10 +11,7 @@ const FileUpload: React.FC = () => {
   const isLoggedIn = useSelector((state: any) => {
     return state.auth.isLoggedIn;
   });
-  if (!isLoggedIn) {
-    console.log("inside if");
-    navigate("/login");
-  }
+  
   useEffect(() => {
     if (!isLoggedIn) {
       console.log("inside if");

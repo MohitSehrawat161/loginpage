@@ -12,8 +12,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const dispatch=useDispatch()
-
+  const dispatch = useDispatch();
 
   const emailHandler = (newValue: string) => {
     setEmail(newValue);
@@ -37,21 +36,20 @@ export default function LoginPage() {
     );
   };
   const loginHandler = () => {
-
     const storedUser = localStorage.getItem("user");
     console.log(storedUser, "clicked");
     let user;
     if (storedUser !== null) user = JSON.parse(storedUser);
-    console.log(user)
-    if(!user){
-console.log('inside if')
-      showError('User does not exist','error')
-      return
-    } 
-    let [fltUser]=user.filter((e:any)=>{
-   return e.email===email
-    })
-    console.log(fltUser)
+    console.log(user);
+    if (!user) {
+      console.log("inside if");
+      showError("User does not exist", "error");
+      return;
+    }
+    let [fltUser] = user.filter((e: any) => {
+      return e.email === email;
+    });
+    console.log(fltUser);
 
     if (!email || !pass) {
       showError("All fields are Mandatory", "error");
@@ -60,9 +58,9 @@ console.log('inside if')
     } else if (fltUser?.pass !== pass) {
       showError("Wrong Password", "error");
     } else {
-        dispatch(authActions.email(email))
-        dispatch(authActions.isLoggedIn())
-     
+      dispatch(authActions.email(email));
+      dispatch(authActions.isLoggedIn());
+
       navigate("/home");
     }
   };
