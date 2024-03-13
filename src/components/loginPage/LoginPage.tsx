@@ -37,11 +37,17 @@ export default function LoginPage() {
     );
   };
   const loginHandler = () => {
+
     const storedUser = localStorage.getItem("user");
     console.log(storedUser, "clicked");
     let user;
     if (storedUser !== null) user = JSON.parse(storedUser);
     console.log(user)
+    if(!user){
+console.log('inside if')
+      showError('User does not exist','error')
+      return
+    } 
     let [fltUser]=user.filter((e:any)=>{
    return e.email===email
     })
@@ -56,6 +62,7 @@ export default function LoginPage() {
     } else {
         dispatch(authActions.email(email))
         dispatch(authActions.isLoggedIn())
+     
       navigate("/home");
     }
   };

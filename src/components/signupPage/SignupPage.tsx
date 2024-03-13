@@ -48,6 +48,7 @@ export default function SignupPage() {
     if (users) {
      users= JSON.parse(users);
     }
+    else users=[]
     console.log(users)
     let arr = [...users];
     const obj = {
