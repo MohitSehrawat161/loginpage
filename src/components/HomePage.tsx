@@ -1,38 +1,70 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import notify from "devextreme/ui/notify";
+import { useNavigate } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 import FileUploader, {
   FileUploaderTypes,
 } from "devextreme-react/file-uploader";
 const FileUpload: React.FC = () => {
-  notify(
-    {
-      message: "Logged in SuccessFull",
-      width: 230,
-      position: {
-        at: "bottom",
-        my: "bottom",
-        of: "#container",
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state: any) => {
+    return state.auth.isLoggedIn;
+  });
+  if (!isLoggedIn) {
+    console.log("inside if");
+    navigate("/login");
+  }
+  useEffect(() => {
+    if (!isLoggedIn) {
+      console.log("inside if");
+      navigate("/login");
+      notify(
+        {
+          message: "Log in first",
+          width: 230,
+          position: {
+            at: "bottom",
+            my: "bottom",
+            of: "#container",
+          },
+        },
+        "error",
+        3000
+      );
+    }
+  }, []);
+
+  if (isLoggedIn) {
+    notify(
+      {
+        message: "Logged in SuccessFull",
+        width: 230,
+        position: {
+          at: "bottom",
+          my: "bottom",
+          of: "#container",
+        },
       },
-    },
-    "success",
-    5000
-  );
-  let data:any = localStorage.getItem("data");
+      "success",
+      3000
+    );
+  }
+  let data: any = localStorage.getItem("data");
   if (data) {
     data = JSON.parse(data);
   } else {
     data = [];
   }
   // console.log(data);
-  const [selectedFiles, setSelectedFiles] =
-    useState(data);
-    
-    // console.log(localStorage.getItem("data"));
-    const onSelectedFilesChanged = useCallback(
-      (e: FileUploaderTypes.ValueChangedEvent) => {
-      console.log(e.value)
-       
-      let all:any=e.value 
+  const [selectedFiles, setSelectedFiles] = useState(data);
+
+  // console.log(localStorage.getItem("data"));
+  const onSelectedFilesChanged = useCallback(
+    (e: FileUploaderTypes.ValueChangedEvent) => {
+      console.log(e.value);
+
+      let all: any = e.value;
       let arr = [...selectedFiles];
       if (e.value) {
         for (let i of all) {
@@ -45,9 +77,8 @@ const FileUpload: React.FC = () => {
         }
       }
       localStorage.setItem("data", JSON.stringify(arr));
-    all?.unshift(...selectedFiles)  
-      setSelectedFiles(e.value)
-  
+      all?.unshift(...selectedFiles);
+      setSelectedFiles(e.value);
     },
     [setSelectedFiles]
   );
@@ -64,7 +95,7 @@ const FileUpload: React.FC = () => {
         />
         <div>
           <h4>Selected Files</h4>
-          {selectedFiles?.map((file:any, i:any) => (
+          {selectedFiles?.map((file: any, i: any) => (
             <div
               className="selected-item"
               key={i}
@@ -92,5 +123,3 @@ const FileUpload: React.FC = () => {
 };
 
 export default FileUpload;
-
-

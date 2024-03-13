@@ -11,7 +11,6 @@ export default function SignupPage() {
   const [emailValue, setEmailValue] = useState("");
   const [passValue, setPassValue] = useState("");
   const [cnfPassValue, setCnfPassValue] = useState("");
-  
 
   const handleInputChange = (newValue: string) => {
     console.log(newValue, "newValue");
@@ -37,7 +36,7 @@ export default function SignupPage() {
         position: {
           at: "bottom",
           my: "bottom",
-          of: "#container"
+          of: "#container",
         },
       },
       type,
@@ -45,12 +44,20 @@ export default function SignupPage() {
     );
   };
   const signUpHandler = () => {
+    let users: any = localStorage.getItem("user");
+    if (users) {
+     users= JSON.parse(users);
+    }
+    console.log(users)
+    let arr = [...users];
     const obj = {
       name: inputValue,
       email: emailValue,
       pass: passValue,
       cnfPass: cnfPassValue,
     };
+    arr.push(obj);
+    console.log(arr,'all users')
     if (cnfPassValue !== passValue) {
       showError("Password do not match", "error");
       return;
@@ -59,8 +66,8 @@ export default function SignupPage() {
 
       return;
     }
-   
-    localStorage.setItem("user", JSON.stringify(obj));
+
+    localStorage.setItem("user", JSON.stringify(arr));
     showError("Account Created! You can login Now", "success");
   };
 
@@ -74,16 +81,13 @@ export default function SignupPage() {
           value={inputValue}
           onValueChange={handleInputChange}
         />
-       
-
         <TextBox
           placeholder="Enter Your Email"
           className="inputField"
           showClearButton={true}
           value={emailValue}
           onValueChange={emailHandler}
-          />
-         
+        />
         <TextBox
           placeholder="Enter Password"
           className="inputField"
@@ -108,4 +112,3 @@ export default function SignupPage() {
     </React.Fragment>
   );
 }
-

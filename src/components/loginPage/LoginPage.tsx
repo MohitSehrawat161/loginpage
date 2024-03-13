@@ -41,15 +41,21 @@ export default function LoginPage() {
     console.log(storedUser, "clicked");
     let user;
     if (storedUser !== null) user = JSON.parse(storedUser);
+    console.log(user)
+    let [fltUser]=user.filter((e:any)=>{
+   return e.email===email
+    })
+    console.log(fltUser)
 
     if (!email || !pass) {
       showError("All fields are Mandatory", "error");
-    } else if (user?.email !== email) {
+    } else if (fltUser?.email !== email) {
       showError("User Does Not Exist", "error");
-    } else if (user?.pass !== pass) {
+    } else if (fltUser?.pass !== pass) {
       showError("Wrong Password", "error");
     } else {
         dispatch(authActions.email(email))
+        dispatch(authActions.isLoggedIn())
       navigate("/home");
     }
   };
