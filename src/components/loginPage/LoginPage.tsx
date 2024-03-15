@@ -7,6 +7,7 @@ import notify from "devextreme/ui/notify";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authentication";
 import { useDispatch } from "react-redux";
+import { Validator, EmailRule } from "devextreme-react/validator";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ export default function LoginPage() {
         message: message,
         width: 230,
         position: {
-          at: "bottom",
-          my: "bottom",
+          at: "top right",
+          my: "top right",
           of: "#container",
         },
       },
@@ -60,6 +61,7 @@ export default function LoginPage() {
     } else {
       dispatch(authActions.email(email));
       dispatch(authActions.isLoggedIn());
+      localStorage.setItem("isLoggedIn", "true");
 
       navigate("/home");
     }
@@ -75,12 +77,17 @@ export default function LoginPage() {
             className="inputField"
             showClearButton={true}
             onValueChange={emailHandler}
-          />
+          >
+            <Validator>
+              <EmailRule message="Invalid Email" />
+            </Validator>
+          </TextBox>
           <TextBox
             placeholder="Enter Password"
             className="inputField"
             showClearButton={true}
             onValueChange={passHandler}
+            mode="password"
           />
 
           <Button onClick={loginHandler} className="button" text="Login" />

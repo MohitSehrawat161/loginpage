@@ -14,7 +14,7 @@ const FileUpload: React.FC = () => {
   
   useEffect(() => {
     if (!isLoggedIn) {
-      console.log("inside if");
+    
       navigate("/login");
       notify(
         {

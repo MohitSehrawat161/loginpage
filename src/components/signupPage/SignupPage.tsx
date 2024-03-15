@@ -5,6 +5,11 @@ import "./SignupPage.scss";
 import { Button } from "devextreme-react/button";
 import { Link } from "react-router-dom";
 import notify from "devextreme/ui/notify";
+import {
+  Validator,
+  EmailRule,
+  StringLengthRule,
+} from "devextreme-react/validator";
 
 export default function SignupPage() {
   const [inputValue, setInputValue] = useState("");
@@ -34,8 +39,8 @@ export default function SignupPage() {
         message: message,
         width: 230,
         position: {
-          at: "bottom",
-          my: "bottom",
+          at: "top right",
+          my: "top right",
           of: "#container",
         },
       },
@@ -46,10 +51,9 @@ export default function SignupPage() {
   const signUpHandler = () => {
     let users: any = localStorage.getItem("user");
     if (users) {
-     users= JSON.parse(users);
-    }
-    else users=[]
-    console.log(users)
+      users = JSON.parse(users);
+    } else users = [];
+    console.log(users);
     let arr = [...users];
     const obj = {
       name: inputValue,
@@ -58,13 +62,16 @@ export default function SignupPage() {
       cnfPass: cnfPassValue,
     };
     arr.push(obj);
-    console.log(arr,'all users')
+    console.log(arr, "all users");
     if (cnfPassValue !== passValue) {
       showError("Password do not match", "error");
       return;
     } else if (!inputValue || !emailValue || !passValue || !cnfPassValue) {
       showError("All fields are Mandatory", "error");
 
+      return;
+    } else if (passValue.length < 5) {
+      showError("Password should be greater then 5 characters", "error");
       return;
     }
 
@@ -88,14 +95,25 @@ export default function SignupPage() {
           showClearButton={true}
           value={emailValue}
           onValueChange={emailHandler}
-        />
+        >
+          <Validator>
+            <EmailRule message="Invalid Email" />
+          </Validator>
+        </TextBox>
         <TextBox
           placeholder="Enter Password"
           className="inputField"
           showClearButton={true}
           onValueChange={passHandler}
           mode="password"
-        />
+        >
+          <Validator>
+            <StringLengthRule
+              min={5}
+              message="Password should be greater then 5 characters"
+            />
+          </Validator>
+        </TextBox>
         <TextBox
           placeholder="Confirm password"
           className="inputField"
